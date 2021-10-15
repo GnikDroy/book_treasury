@@ -1,11 +1,14 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Header() {
     return (
         <div className="container my-5">
             <div className="row align-items-center">
                 <div className="col-8">
-                    <Title />
+                    <Link to="/" className="text-decoration-none text-light">
+                        <Title />
+                    </Link>
                 </div>
                 <div className="col-4 px-1">
                     <SearchBar />

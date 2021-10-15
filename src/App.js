@@ -1,14 +1,29 @@
 import React from 'react';
-import BookDisplay from './BookDisplay';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import Header from './Header';
+import Home from './Home';
+import BookDetail from './BookDetail';
 
 function App() {
   return (
-    <>
-      <Header />
-      <BookDisplay />
-    </>
+    <Router>
+      <Header/>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/book/:id">
+          <BookDetail/>
+        </Route>
+        <Route path="*">
+          <h1> Invalid page!</h1>
+        </Route>
+
+      </Switch>
+    </Router>
   );
+
 }
 
 export default App;

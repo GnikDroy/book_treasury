@@ -1,5 +1,6 @@
 import React from 'react';
-import {parse_book} from "./BookApi";
+import { parse_book } from "./BookApi";
+import { Link } from 'react-router-dom';
 
 function BookCard(props) {
     const book = parse_book(props)
@@ -15,9 +16,7 @@ function BookCard(props) {
                 <div className="card-body" >
                     <h5 className="card-title" > {book.title} </h5>
                     <p className="card-text" > {author} </p>
-                    <p className="card-text" > {book.downloads} </p>
-                    <p className="card-text" > {book.type} </p>
-                    <a href={book.description} className="btn btn-outline-light" > See Details </a>
+                    <Link to={"/book/" + book.id} className="btn btn-outline-light"> See Details</Link>
                 </div>
             </div>
         </div>

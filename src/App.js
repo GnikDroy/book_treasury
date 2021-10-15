@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Header from './Header';
 import Home from './Home';
-import BookDetail from './BookDetail';
+import BookDetailsPage from './BookDetailsPage';
 import SearchResults from './SearchResults';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/book/:id">
-          <BookDetail/>
+          <BookDetailsPage/>
         </Route>
         <Route path="/search/:q">
           <SearchResults/>

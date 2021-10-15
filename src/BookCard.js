@@ -12,7 +12,7 @@ function BookCard(props) {
                 style={{ width: "18rem" }} >
                 <img className="card-img-top img-fluid"
                     src={cover}
-                    alt="Card cap" />
+                    alt="Cover" />
                 <div className="card-body" >
                     <h5 className="card-title" > {book.title} </h5>
                     <p className="card-text" > {author} </p>

@@ -2,9 +2,9 @@ import React from 'react';
 import Throbber from './Throbber';
 import CardGrid from './CardGrid';
 import BookCard from './BookCard';
-import { api_book } from './BookApi';
+import { fetch_books } from './BookApi';
 
-function BookDisplay(props) {
+function BookCatalogue(props) {
     const [loading, setLoading] = React.useState(true);
     const [books, setBooks] = React.useState([]);
     const [error, setError] = React.useState(false);
@@ -15,7 +15,7 @@ function BookDisplay(props) {
     const observer = React.useRef();
 
     React.useEffect(() => {
-        api_book({...props.query, page: next_page }).then((result) => {
+        fetch_books({ ...props.query, page: next_page }).then((result) => {
             if (props.append) {
                 setBooks(prev => [...prev, ...result.results]);
             } else {
@@ -45,32 +45,25 @@ function BookDisplay(props) {
     const display_error_msg = error ? "block" : "none";
     const display_throbber = loading && !error;
 
-    return ( <
-        div className = "container" >
-        <
-        div className = "alert alert-danger"
-        role = "alert"
-        style = {
-            { display: display_error_msg }
-        } >
-        The API is currently unreachable.Please reach out to the site administrator. <
-        /div> <
-        CardGrid card = { BookCard }
-        data = { books }
-        key_fn = {
-            (x) => { return x.id; }
-        }
-        /> <
-        div ref = { end_of_books }
-        className = "d-flex justify-content-center my-5" >
-        <
-        Throbber visible = { display_throbber }
-        size = { "6rem" }
-        /> < /
-        div > <
-        /div>
+    const error_msg = (
+        <div className="alert alert-danger" role="alert" style={{ display: display_error_msg }} >
+            The API is currently unreachable.Please reach out to the site administrator.
+        </div>
+    );
 
+    const throbber = (
+        <div ref={end_of_books} className="d-flex justify-content-center my-5" >
+            <Throbber visible={display_throbber} size={"6rem"} />
+        </div >
+    );
+
+    return (
+        <div className="container">
+            {error_msg}
+            <CardGrid card={BookCard} data={books} key_fn={(x) => { return x.id; }} />
+            {throbber}
+        </div>
     );
 }
 
-export default BookDisplay;
+export default BookCatalogue;

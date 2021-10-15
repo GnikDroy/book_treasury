@@ -1,11 +1,8 @@
-
 import React from 'react';
-import BookDisplay from './BookDisplay';
+import BookCatalogue from './BookCatalogue';
 
 function Home() {
-  return (
-      <BookDisplay query={{}} append={true}/>
-  );
+  return <BookCatalogue query={{}} append={true}/>;
 }
 
 export default Home;

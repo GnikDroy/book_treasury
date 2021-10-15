@@ -1,18 +1,13 @@
 const api_base = "https://gnikdroy.pythonanywhere.com/api"
 
 
-export async function fetch_book(book_id) {
+export async function fetch_book(book_id, query = {}) {
     const url = api_base + "/book/" + book_id;
-    const response = await fetch(url);
-    return await response.json();
-}
-
-export async function api_book(query) {
-    const url = api_base + "/book?";
     const response = await fetch(url + new URLSearchParams(query));
     return await response.json();
 }
-export async function fetch_popular(query) {
+
+export async function fetch_books(query) {
     const url = api_base + "/book?";
     const response = await fetch(url + new URLSearchParams(query));
     return await response.json();

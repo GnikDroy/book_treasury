@@ -7,7 +7,7 @@ function BookCard(props) {
     const author = book.author === null ? "" : book.author.person;
     const cover = book.cover === null ? process.env.PUBLIC_URL + "/not_available.png" : book.cover.uri;
     return (
-        <div className="col my-3">
+        <div className="fade-slide-bottom col my-3">
             <div className="card h-100 bg-success text-white"
                 style={{ width: "18rem" }} >
                 <img className="card-img-top img-fluid"

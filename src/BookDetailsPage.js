@@ -28,7 +28,7 @@ function BookDetailsPage() {
     );
 
     const throbber = (
-        <div className="d-flex justify-content-center my-5">
+        <div className="d-flex justify-content-center py-5 my-5">
             <Throbber visible={loading && !error} size="6rem" />
         </div>
     );

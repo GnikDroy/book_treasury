@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 function Header() {
     const history = useHistory();
     return (
-        <div className="container my-5">
+        <div className="fade-slide-top container my-5">
             <div className="row align-items-center">
                 <div className="col-8">
                     <Link to="/" className="text-decoration-none text-light">

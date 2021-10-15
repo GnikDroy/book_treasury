@@ -1,29 +1,14 @@
 import React from 'react'
-import Card from './Card'
-import { fetch_popular } from "./BookApi"
 
-class CardGrid extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            books: []
-        };
-
-        fetch_popular().then((result) => {
-            this.setState({ books: result.results });
-        }).catch(() => {
-            console.log("Error!");
-        });
-
-    }
-
-    render() {
-        return (
-            <div className="card-columns text-center">
-                {this.state.books.map((x) => <Card key={x.id} book={x} />)}
+/* <CardGrid card={Card} data={[]} key_fn={} /> */
+function CardGrid(props) {
+    return (
+        <div className="container">
+            <div className="row row-cols-4 g-4">
+                {props.data.map((x) => <React.Fragment key={props.key_fn(x)}> {props.card(x)} </React.Fragment>)}
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default CardGrid

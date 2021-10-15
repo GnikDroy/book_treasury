@@ -1,12 +1,12 @@
 import React from 'react';
-import CardGrid from './CardGrid';
+import BookDisplay from './BookDisplay';
 import Header from './Header';
 
 function App() {
   return (
     <>
       <Header />
-      <CardGrid />
+      <BookDisplay />
     </>
   );
 }

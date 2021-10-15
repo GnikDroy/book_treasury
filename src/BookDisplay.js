@@ -1,48 +1,58 @@
-import React from 'react'
-import Throbber from './Throbber'
-import CardGrid from './CardGrid'
-import BookCard from './BookCard'
-import { fetch_popular } from './BookApi'
+import React from 'react';
+import Throbber from './Throbber';
+import CardGrid from './CardGrid';
+import BookCard from './BookCard';
+import { fetch_popular } from './BookApi';
 
-class BookDisplay extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: true,
-            books: [],
-            error: false,
-        }
-        fetch_popular().then((result) => {
-            this.setState({ books: result.results, loading: false });
+function BookDisplay(props) {
+    const [loading, setLoading] = React.useState(true);
+    const [books, setBooks] = React.useState([]);
+    const [error, setError] = React.useState(false);
+    const [next_page, setNextPage] = React.useState(1);
+    const [next_available, setNextAvailable] = React.useState(true);
+
+    const end_of_books = React.useRef();
+    const observer = React.useRef();
+
+    React.useEffect(() => {
+        fetch_popular(next_page).then((result) => {
+            setBooks(prev => [...prev, ...result.results]);
+            setNextAvailable(result.next !== null);
+            setLoading(false);
         }).catch(() => {
-            this.setState({ error: true });
+            setError(true);
         });
-        
+    }, [next_page]);
 
-        // let observer = new IntersectionObserver((entries, observer)=>{console.log("Toggle");}, {});
-        // let observing_item = document.getElementById("book-display-end");
-        // console.log(observing_item);
-        // observer.observe(observing_item);
 
+    if (observer.current) { observer.current.disconnect(); }
+    observer.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting === true) {
+            if (!loading && !error && next_available) {
+                setNextPage((page) => page + 1);
+                setLoading(true);
+            }
+        }
+    });
+    if (end_of_books.current != null) {
+        observer.current.observe(end_of_books.current);
     }
 
-    render() {
-        const display_error_msg = this.state.error ? "block" : "none";
-        const display_throbber = this.state.loading && !this.state.error;
+    const display_error_msg = error ? "block" : "none";
+    const display_throbber = loading && !error;
 
-        return (
-            <div className="container">
-                <div className="alert alert-danger" role="alert" style={{ display: display_error_msg}}>
-                    The API is currently unreachable. Please reach out to the site administrator.
-                </div>
-                <CardGrid card={BookCard} data={this.state.books} key_fn={(x) => { return x.id; }} />
-                <div id="book-display-end" className="text-center">
-                    <Throbber visible={display_throbber} size={"6rem"} />
-                </div>
+    return (
+        <div className="container">
+            <div className="alert alert-danger" role="alert" style={{ display: display_error_msg }}>
+                The API is currently unreachable. Please reach out to the site administrator.
             </div>
+            <CardGrid card={BookCard} data={books} key_fn={(x) => { return x.id; }} />
+            <div ref={end_of_books} className="d-flex justify-content-center my-5">
+                <Throbber visible={display_throbber} size={"6rem"} />
+            </div>
+        </div>
 
-        );
-    }
+    );
 }
 
-export default BookDisplay
+export default BookDisplay;

@@ -1,9 +1,9 @@
 const api_base = "https://gnikdroy.pythonanywhere.com/api"
 
 
-export async function fetch_popular() {
-    const url = api_base + "/book";
-    const response = await fetch(url);
+export async function fetch_popular(page_num = 1) {
+    const url = api_base + "/book?";
+    const response = await fetch(url + new URLSearchParams({ page: page_num }));
     return await response.json();
 }
 

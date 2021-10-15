@@ -4,7 +4,7 @@ import BookDisplay from './BookDisplay';
 
 function Home() {
   return (
-      <BookDisplay />
+      <BookDisplay query={{}} append={true}/>
   );
 }
 

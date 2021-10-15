@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function BookCard(props) {
     const book = parse_book(props)
     const author = book.author === null ? "" : book.author.person;
-    const cover = book.cover === null ? "not_available.png" : book.cover.uri;
+    const cover = book.cover === null ? process.env.PUBLIC_URL + "/not_available.png" : book.cover.uri;
     return (
         <div className="col my-3">
             <div className="card h-100 bg-success text-white"

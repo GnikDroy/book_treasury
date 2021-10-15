@@ -7,14 +7,14 @@ export async function fetch_book(book_id) {
     return await response.json();
 }
 
-export async function search_book(q) {
+export async function api_book(query) {
     const url = api_base + "/book?";
-    const response = await fetch(url + new URLSearchParams({ search: q }));
+    const response = await fetch(url + new URLSearchParams(query));
     return await response.json();
 }
-export async function fetch_popular(page_num = 1) {
+export async function fetch_popular(query) {
     const url = api_base + "/book?";
-    const response = await fetch(url + new URLSearchParams({ page: page_num }));
+    const response = await fetch(url + new URLSearchParams(query));
     return await response.json();
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Header() {
     return (
@@ -23,12 +23,14 @@ function Title() {
 }
 
 function SearchBar() {
+    const input = React.useRef();
+    const history = useHistory();
     return (
         <div className="input-group mb-3">
-          <input type="text" className="form-control" placeholder="Book Title" aria-label="Book Title" aria-describedby="basic-addon2"/>
-          <div className="input-group-append">
-            <button className="btn-lg btn-success" type="button">Search</button>
-          </div>
+            <input ref={input} type="text" className="form-control" placeholder="Book Title" aria-label="Book Title" aria-describedby="basic-addon2" />
+            <div className="input-group-append">
+                <button className="btn-lg btn-success" type="button" onClick={() => { history.push("/search/" + input.current.value) }}>Search</button>
+            </div>
         </div>
     );
 

@@ -4,7 +4,7 @@ import React from 'react'
 function CardGrid(props) {
     return (
         <div className="container">
-            <div className="row row-cols-4 g-4">
+            <div className="row row-cols-4-lg g-4">
                 {props.data.map((x) => <React.Fragment key={props.key_fn(x)}> {props.card(x)} </React.Fragment>)}
             </div>
         </div>

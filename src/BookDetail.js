@@ -28,7 +28,7 @@ function BookDetail(props) {
      return (
         <div className="container">
             <div className="row">
-                <div className="col fade-slide-left">
+                <div className="col-md fade-slide-left">
                     <img className="img-fluid" src={cover} alt="Cover" />
                     <h1 >{props.book.title}</h1>
                     <h4 >{author}</h4>
@@ -40,7 +40,7 @@ function BookDetail(props) {
                     </p>
                     <a href={props.book.license} className="btn btn-outline-success">License</a>
                 </div>
-                <div className="col fade-slide-right">
+                <div className="col-md fade-slide-right">
                     {props.book.resources != null && <ResourceList resources={props.book.resources} />}
                 </div>
             </div>

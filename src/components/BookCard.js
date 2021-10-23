@@ -1,5 +1,5 @@
 import React from 'react';
-import { parse_book } from "./BookApi";
+import { parse_book } from "../api/BookApi";
 import { Link } from 'react-router-dom';
 
 function BookCard(props) {

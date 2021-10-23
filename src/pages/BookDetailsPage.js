@@ -1,9 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import { fetch_book, parse_book, extract_epub } from './BookApi';
-import Throbber from './Throbber';
-import BookDetail from './BookDetail';
-import BookEpubView from './BookEpubView';
+import { fetch_book, parse_book, extract_epub } from '../api/BookApi';
+import Throbber from '../components/Throbber';
+import BookDetail from '../components/BookDetail';
+import BookEpubView from '../components/BookEpubView';
 
 
 function BookDetailsPage() {

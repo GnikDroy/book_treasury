@@ -90,6 +90,15 @@ export default function BookEpubView(props) {
         </ul>
     </div>;
 
+    const controls =
+        <div className="pb-2" style={{ background: bg, color: fg, textAlign: 'center', zIndex: 1 }}>
+            <div className="row">
+                <div className="col"> {fontControl} </div>
+                <div className="col"> {themeControl} </div>
+                <div className="col"> {fullScreenControl} </div>
+            </div>
+        </div>;
+
     return (
         <div ref={viewRef} className="mt-5">
             <div style={{ height: "100vh" }} className="position-relative">
@@ -107,13 +116,8 @@ export default function BookEpubView(props) {
                         }
                     }
                 } />
-                <div className="pb-2" style={{ background: bg, color: fg, textAlign: 'center', zIndex: 1 }}>
-                    <div className="row">
-                        <div className="col"> {fontControl} </div>
-                        <div className="col"> {themeControl} </div>
-                        <div className="col"> {fullScreenControl} </div>
-                    </div>
-                </div>
+
+                {controls}
             </div>
         </div>
     );

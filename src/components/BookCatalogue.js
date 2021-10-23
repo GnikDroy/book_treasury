@@ -2,7 +2,7 @@ import React from 'react';
 import Throbber from './Throbber';
 import CardGrid from './CardGrid';
 import BookCard from './BookCard';
-import { fetch_books } from './BookApi';
+import { fetch_books } from '../api/BookApi';
 
 const defaultState = {
     loading: true,

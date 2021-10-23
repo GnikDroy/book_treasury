@@ -1,5 +1,5 @@
 import React from 'react';
-import BookCatalogue from "./BookCatalogue";
+import BookCatalogue from "../components/BookCatalogue";
 import { useParams } from 'react-router-dom';
 
 function SearchResults(props) {

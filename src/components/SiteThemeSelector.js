@@ -1,4 +1,5 @@
 import React from 'react';
+import { getThemePreference } from '../utils';
 
 function change_theme(theme_type) {
     localStorage.setItem("theme", theme_type);
@@ -14,8 +15,10 @@ function change_theme(theme_type) {
         document.body.classList.add("bg-light");
     }
 }
+
+
 function SiteThemeSelector(props) {
-    const [theme, setTheme] = React.useState(localStorage.getItem("theme") || "dark");
+    const [theme, setTheme] = React.useState(localStorage.getItem("theme") || getThemePreference());
     const checkboxRef = React.useRef();
 
     React.useEffect(() => {

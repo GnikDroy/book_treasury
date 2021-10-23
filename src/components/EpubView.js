@@ -1,30 +1,31 @@
 import React from 'react';
 import { ReactReader } from "react-reader";
-import EpubThemes from './EpubThemes';
-import { GetEpubTheme } from './EpubThemes';
+import epubThemes from './EpubThemes';
+import { getEpubTheme } from './EpubThemes';
+import { getThemePreference } from '../utils';
 
 export default function EpubView(props) {
     const [size, setSize] = React.useState(() => Number(localStorage.getItem("reader_font_size")) || 100);
-    const [theme, setTheme] = React.useState(() => localStorage.getItem("reader_theme") || "dark")
+    const [theme, setTheme] = React.useState(() => localStorage.getItem("reader_theme") || getThemePreference());
     const renditionRef = React.useRef();
     const viewRef = React.useRef();
 
     React.useEffect(() => {
+        localStorage.setItem("reader_font_size", size);
         if (renditionRef.current) {
             renditionRef.current.themes.fontSize(`${size}%`);
-            localStorage.setItem("reader_font_size", size);
         }
     }, [size]);
 
     React.useEffect(() => {
+        localStorage.setItem("reader_theme", theme);
         if (renditionRef.current) {
             renditionRef.current.themes.select(theme);
-            localStorage.setItem("reader_theme", theme);
         }
     }, [theme]);
 
-    const fg = GetEpubTheme(theme).inner.body.color;
-    const bg = GetEpubTheme(theme).inner.body.background;
+    const fg = getEpubTheme(theme).inner.body.color;
+    const bg = getEpubTheme(theme).inner.body.background;
 
     const fontButtonStyle = { color: fg, backgroundColor: "none", border: "1px solid " + fg };
 
@@ -78,12 +79,12 @@ export default function EpubView(props) {
                 <ReactReader {
                     ...{
                         ...props,
-                        styles: GetEpubTheme(theme).reactReader,
+                        styles: getEpubTheme(theme).reactReader,
                         getRendition: (rendition) => {
                             renditionRef.current = rendition;
                             rendition.themes.fontSize(`${size}%`);
                             rendition.themes.register(Object.fromEntries(
-                                Object.entries(EpubThemes).map(([k, v]) => [k, v.inner])
+                                Object.entries(epubThemes).map(([k, v]) => [k, v.inner])
                             ));
                             rendition.themes.select(theme);
                         }

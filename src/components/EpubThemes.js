@@ -1,7 +1,7 @@
 
 import { ReactReaderStyle } from "react-reader";
 
-function GeneratePlainEpubTheme(foreground, background) {
+function generatePlainEpubTheme(foreground, background) {
     return {
         ...ReactReaderStyle,
         readerArea: { ...ReactReaderStyle.readerArea, backgroundColor: background, },
@@ -18,23 +18,23 @@ function GeneratePlainEpubTheme(foreground, background) {
     };
 }
 
-export function GetEpubTheme(theme) {
-    return EpubThemeMap[theme] || EpubThemeMap["dark"];
+export function getEpubTheme(theme) {
+    return epubThemeMap[theme] || epubThemeMap["dark"];
 }
 
-const EpubThemeMap = {
+const epubThemeMap = {
     dark: {
-        reactReader: GeneratePlainEpubTheme("#e7e7e7", "#1d2022"),
+        reactReader: generatePlainEpubTheme("#e7e7e7", "#1d2022"),
         inner: { body: { color: '#e7e7e7', background: '#1d2022' }, a: { color: "#e7e7e7" }, "a:hover": { color: "#e7e7e7" } },
     },
     light: {
-        reactReader: GeneratePlainEpubTheme("#1d2022", "#e7e7e7"),
+        reactReader: generatePlainEpubTheme("#1d2022", "#e7e7e7"),
         inner: { body: { color: '#1d2022', background: '#e7e7e7' }, a: { color: "#1d2022" }, "a:hover": { color: "#1d2022" } },
     },
     sepia: {
-        reactReader: GeneratePlainEpubTheme("#1d2022", "#c5b281"),
+        reactReader: generatePlainEpubTheme("#1d2022", "#c5b281"),
         inner: { body: { color: '#1d2022', background: '#c5b281' }, a: { color: "#1d2022" }, "a:hover": { color: "#1d2022" } },
     },
 };
 
-export default EpubThemeMap;
+export default epubThemeMap;

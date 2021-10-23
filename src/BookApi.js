@@ -14,13 +14,28 @@ export async function fetch_books(query) {
 }
 
 export function parse_book(book) {
-    return {...book, cover: extract_cover(book), author: extract_author(book) };
+    return { ...book, cover: extract_cover(book), author: extract_author(book) };
 }
 
 function extract_author(book) {
     for (const agent of book.agents) {
         if (agent.type === "Author") {
             return agent;
+        }
+    }
+    return null;
+}
+
+export function extract_epub(book) {
+    if (book.resources == null) { return null; }
+    for (const resource of book.resources) {
+        if (resource.uri.endsWith(".epub.images")) {
+            return resource;
+        }
+    }
+    for (const resource of book.resources) {
+        if (resource.uri.endsWith(".epub.noimages")) {
+            return resource;
         }
     }
     return null;

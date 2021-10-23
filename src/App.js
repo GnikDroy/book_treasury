@@ -5,23 +5,24 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import BookDetailsPage from './pages/BookDetailsPage';
 import SearchResults from './pages/SearchResults';
+import InvalidPage from './pages/404';
 
 function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
         <Route path="/book/:id">
-          <BookDetailsPage/>
+          <BookDetailsPage />
         </Route>
         <Route path="/search/:q">
-          <SearchResults/>
+          <SearchResults />
         </Route>
         <Route path="*">
-          <h1> Invalid page!</h1>
+          <InvalidPage />
         </Route>
 
       </Switch>

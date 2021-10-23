@@ -15,7 +15,7 @@ export function Resource(props) {
 export function ResourceList(props) {
     return (
         <div className="text-end">
-            <h3 className="mb-2">Download Links</h3>
+            <h3 className="mb-2">Resource Links</h3>
             {props.resources.map(x => <React.Fragment key={x.id}>{Resource(x)}</React.Fragment>)}
         </div>
     );

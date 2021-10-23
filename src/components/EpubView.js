@@ -1,39 +1,9 @@
 import React from 'react';
-import { ReactReader, ReactReaderStyle } from "react-reader";
+import { ReactReader } from "react-reader";
+import EpubThemes from './EpubThemes';
+import { GetEpubTheme } from './EpubThemes';
 
-function generate_plain_theme(foreground, background) {
-    return {
-        ...ReactReaderStyle,
-        readerArea: { ...ReactReaderStyle.readerArea, backgroundColor: background, },
-        titleArea: { ...ReactReaderStyle.titleArea, color: foreground, },
-        tocArea: { ...ReactReaderStyle.tocArea, background: background, color: foreground, },
-        tocAreaButton: {
-            ...ReactReaderStyle.tocAreaButton,
-            color: foreground,
-            borderBottom: "1px solid " + foreground,
-        },
-        tocButtonExpanded: { ...ReactReaderStyle.tocButtonExpanded, background: background, },
-        arrow: { ...ReactReaderStyle.arrow, background: background, color: foreground, },
-        loadingView: { ...ReactReaderStyle.loadingView, color: foreground, }
-    };
-}
-
-const themeMap = {
-    dark: {
-        reactReader: generate_plain_theme("#e7e7e7", "#1d2022"),
-        inner: { body: { color: '#e7e7e7', background: '#1d2022' }, a: { color: "#e7e7e7" }, "a:hover": { color: "#e7e7e7" } },
-    },
-    light: {
-        reactReader: generate_plain_theme("#1d2022", "#e7e7e7"),
-        inner: { body: { color: '#1d2022', background: '#e7e7e7' }, a: { color: "#1d2022" }, "a:hover": { color: "#1d2022" } },
-    },
-    sepia: {
-        reactReader: generate_plain_theme("#1d2022", "#c5b281"),
-        inner: { body: { color: '#1d2022', background: '#c5b281' }, a: { color: "#1d2022" }, "a:hover": { color: "#1d2022" } },
-    },
-};
-
-export default function BookEpubView(props) {
+export default function EpubView(props) {
     const [size, setSize] = React.useState(() => Number(localStorage.getItem("reader_font_size")) || 100);
     const [theme, setTheme] = React.useState(() => localStorage.getItem("reader_theme") || "dark")
     const renditionRef = React.useRef();
@@ -53,8 +23,8 @@ export default function BookEpubView(props) {
         }
     }, [theme]);
 
-    const fg = themeMap[theme].inner.body.color;
-    const bg = themeMap[theme].inner.body.background;
+    const fg = GetEpubTheme(theme).inner.body.color;
+    const bg = GetEpubTheme(theme).inner.body.background;
 
     const fontButtonStyle = { color: fg, backgroundColor: "none", border: "1px solid " + fg };
 
@@ -79,14 +49,17 @@ export default function BookEpubView(props) {
         }}><i className="fas fa-expand"></i>&nbsp;Expand</button>
     </div>;
 
+    const ThemeDropDownItem = ({ theme, displayName }) =>
+        <li><button className="dropdown-item" onClick={() => setTheme(theme)}> {displayName} </button></li>;
+
     const themeControl = <div className="dropdown" style={{ color: fg }}>
         <button style={{ color: fg, border: "1px solid " + fg }} className="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <i className="fas fa-palette"></i>&nbsp;Theme
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><button className="dropdown-item" onClick={() => setTheme("light")}>Light</button></li>
-            <li><button className="dropdown-item" onClick={() => setTheme("dark")}>Dark</button></li>
-            <li><button className="dropdown-item" onClick={() => setTheme("sepia")}>Sepia</button></li>
+            <ThemeDropDownItem theme="light" displayName="Light" />
+            <ThemeDropDownItem theme="dark" displayName="Dark" />
+            <ThemeDropDownItem theme="sepia" displayName="Sepia" />
         </ul>
     </div>;
 
@@ -105,12 +78,12 @@ export default function BookEpubView(props) {
                 <ReactReader {
                     ...{
                         ...props,
-                        styles: themeMap[theme].reactReader,
+                        styles: GetEpubTheme(theme).reactReader,
                         getRendition: (rendition) => {
                             renditionRef.current = rendition;
                             rendition.themes.fontSize(`${size}%`);
                             rendition.themes.register(Object.fromEntries(
-                                Object.entries(themeMap).map(([k, v]) => [k, v.inner])
+                                Object.entries(EpubThemes).map(([k, v]) => [k, v.inner])
                             ));
                             rendition.themes.select(theme);
                         }

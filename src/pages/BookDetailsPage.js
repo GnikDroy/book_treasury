@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { fetch_book, parse_book, extract_epub } from '../api/BookApi';
 import Throbber from '../components/Throbber';
 import BookDetail from '../components/BookDetail';
-import BookEpubView from '../components/BookEpubView';
+import EpubView from '../components/EpubView';
+import AlertBox from '../components/AlertBox';
 
 
 function BookDetailsPage() {
@@ -27,17 +28,15 @@ function BookDetailsPage() {
         [id, epubLocation]
     );
 
-    const error_msg = (
-        <div className="alert alert-danger" role="alert" style={{ display: error ? "block" : "none" }}>
+    const error_msg =
+        <AlertBox visible={error} type="danger">
             The book was not found.
-        </div>
-    );
+        </AlertBox>;
 
-    const throbber = (
+    const CustomThrobber = (props) =>
         <div className="d-flex justify-content-center py-5 my-5">
-            <Throbber visible={loading && !error} size="6rem" />
+            <Throbber {...props} />
         </div>
-    );
 
     return (
         <div className="container">
@@ -47,7 +46,7 @@ function BookDetailsPage() {
                     <BookDetail book={book} />
                     {
                         extract_epub(book) &&
-                        <BookEpubView
+                        <EpubView
                             showToc={true}
                             title={book.title}
                             url={extract_epub(book).uri}
@@ -57,11 +56,14 @@ function BookDetailsPage() {
                                 setEpubLocation(loc);
                                 localStorage.setItem(id, JSON.stringify(loc));
                             }}
+                            loadingView={
+                                <CustomThrobber visible={true} size="6rem" />
+                            }
                         />
                     }
                 </>
             }
-            {throbber}
+            <CustomThrobber visible={loading && !error} size="6rem" />
         </div>
     );
 }

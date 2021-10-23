@@ -2,6 +2,7 @@ import React from 'react';
 import Throbber from './Throbber';
 import CardGrid from './CardGrid';
 import BookCard from './BookCard';
+import AlertBox from './AlertBox';
 import { fetch_books } from '../api/BookApi';
 
 const defaultState = {
@@ -49,7 +50,7 @@ function reducer(state, action) {
 function BookCatalogue(props) {
     const [state, dispatch] = React.useReducer(reducer, defaultState);
     if (state.query !== props.query) {
-        dispatch({type : "LoadInitial", query: props.query});
+        dispatch({ type: "LoadInitial", query: props.query });
     }
 
 
@@ -81,14 +82,13 @@ function BookCatalogue(props) {
         observer.current.observe(end_of_books.current);
     }
 
-    const display_error_msg = state.error ? "block" : "none";
     const display_throbber = state.loading && !state.error;
 
-    const error_msg = (
-        <div className="alert alert-danger" role="alert" style={{ display: display_error_msg }} >
+    const error_msg =
+        <AlertBox visible={state.error} type="danger">
             The API is currently unreachable.Please reach out to the site administrator.
-        </div>
-    );
+        </AlertBox>;
+
 
     const throbber = (
         <div ref={end_of_books} className="d-flex justify-content-center py-5 my-5" >

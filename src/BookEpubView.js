@@ -32,6 +32,7 @@ const themeMap = {
         inner: { body: { color: '#1d2022', background: '#c5b281' }, a: { color: "#1d2022" }, "a:hover": { color: "#1d2022" } },
     },
 };
+
 export default function BookEpubView(props) {
     const [size, setSize] = React.useState(() => Number(localStorage.getItem("reader_font_size")) || 100);
     const [theme, setTheme] = React.useState(() => localStorage.getItem("reader_theme") || "dark")

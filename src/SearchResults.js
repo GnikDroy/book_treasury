@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 function SearchResults(props) {
     let { q } = useParams();
-    return <BookCatalogue query={{ search: q }} append={false} />;
+    return <BookCatalogue query={{ search: q }} />;
 }
 
 export default SearchResults;

@@ -4,37 +4,76 @@ import CardGrid from './CardGrid';
 import BookCard from './BookCard';
 import { fetch_books } from './BookApi';
 
+const defaultState = {
+    loading: true,
+    error: false,
+    books: [],
+    next_page: 1,
+    next_available: true,
+    query: {},
+}
+
+function reducer(state, action) {
+    if (action.type === "LoadNextPage") {
+        return {
+            ...state,
+            next_page: state.next_page + 1,
+            loading: true,
+        }
+    } else if (action.type === "LoadingSuccessful") {
+        return {
+            ...state,
+            books: [...state.books, ...action.books],
+            next_available: action.next_available,
+            loading: false,
+            error: false,
+        };
+    } else if (action.type === "Error") {
+        return {
+            ...state,
+            error: true,
+        }
+    } else if (action.type === "LoadInitial") {
+        return {
+            ...state,
+            books: defaultState.books,
+            next_page: defaultState.next_page,
+            next_available: true,
+            loading: true,
+            query: action.query,
+        };
+    }
+    return new Error("Invalid action type.");
+}
+
 function BookCatalogue(props) {
-    const [loading, setLoading] = React.useState(true);
-    const [books, setBooks] = React.useState([]);
-    const [error, setError] = React.useState(false);
-    const [next_page, setNextPage] = React.useState(1);
-    const [next_available, setNextAvailable] = React.useState(true);
+    const [state, dispatch] = React.useReducer(reducer, defaultState);
+    if (state.query !== props.query) {
+        dispatch({type : "LoadInitial", query: props.query});
+    }
+
 
     const end_of_books = React.useRef();
     const observer = React.useRef();
 
     React.useEffect(() => {
-        fetch_books({ ...props.query, page: next_page }).then((result) => {
-            if (props.append) {
-                setBooks(prev => [...prev, ...result.results]);
+        fetch_books({ ...props.query, page: state.next_page }).then((result) => {
+            if (result.results) {
+                dispatch({ type: "LoadingSuccessful", books: result.results, next_available: result.next !== null });
             } else {
-                setBooks(prev => result.results);
+                dispatch({ type: "Error" });
             }
-            setNextAvailable(result.next !== null);
-            setLoading(false);
         }).catch(() => {
-            setError(true);
+            dispatch({ type: "Error" });
         });
-    }, [props.query, next_page, props.append]);
+    }, [props.query, state.next_page]);
 
 
     if (observer.current) { observer.current.disconnect(); }
     observer.current = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting === true) {
-            if (!loading && !error && next_available) {
-                setNextPage((page) => page + 1);
-                setLoading(true);
+            if (!state.loading && !state.error && state.next_available) {
+                dispatch({ type: "LoadNextPage" });
             }
         }
     });
@@ -42,8 +81,8 @@ function BookCatalogue(props) {
         observer.current.observe(end_of_books.current);
     }
 
-    const display_error_msg = error ? "block" : "none";
-    const display_throbber = loading && !error;
+    const display_error_msg = state.error ? "block" : "none";
+    const display_throbber = state.loading && !state.error;
 
     const error_msg = (
         <div className="alert alert-danger" role="alert" style={{ display: display_error_msg }} >
@@ -60,7 +99,7 @@ function BookCatalogue(props) {
     return (
         <div className="container">
             {error_msg}
-            <CardGrid card={BookCard} data={books} key_fn={(x) => { return x.id; }} />
+            <CardGrid card={BookCard} data={state.books} key_fn={(x) => { return x.id; }} />
             {throbber}
         </div>
     );

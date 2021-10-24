@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
  */
 function AlertBox(props) {
     return (
-        <div className={"alert alert-" + props.type} role="alert">
+        <aside className={"alert alert-" + props.type} role="alert">
             {props.children}
-        </div>
+        </aside>
     );
 }
 
@@ -21,7 +21,7 @@ AlertBox.propTypes = {
      */
     type: PropTypes.oneOf(['primary', 'secondary', 'danger',
         'success', 'info', 'warning', 'light', 'dark']),
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
 }
 
 AlertBox.defaultProps = {

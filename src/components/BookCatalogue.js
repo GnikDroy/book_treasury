@@ -98,17 +98,17 @@ function BookCatalogue(props) {
 
 
     const throbber = (
-        <div ref={end_of_books} className="d-flex justify-content-center py-5 my-5" >
+        <aside ref={end_of_books} className="d-flex justify-content-center py-5 my-5" >
             {display_throbber && <Throbber />}
-        </div >
+        </aside >
     );
 
     return (
-        <div className="container">
+        <main className="container">
             {error_msg}
             <CardGrid card={BookCard} data={state.books} key_fn={(x) => { return x.id; }} />
             {throbber}
-        </div>
+        </main>
     );
 }
 

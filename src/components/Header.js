@@ -50,26 +50,26 @@ function HelpModal(props) {
 
     return (
         <>
-            <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#helpModal">
+            <button type="button" aria-label="About" className="btn" data-bs-toggle="modal" data-bs-target="#helpModal">
                 <i className="fas fa-question text-success"></i>
             </button>
 
-            <div className="modal fade" id="helpModal" tabIndex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+            <article className="modal fade" id="helpModal" tabIndex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-fullscreen">
                     <div className="modal-content bg-success text-light">
-                        <div className="modal-header container">
+                        <header className="modal-header container">
                             <h1 className="modal-title display-3" id="helpModalLabel">About</h1>
                             <button type="button" className="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
+                        </header>
+                        <main className="modal-body">
                             {modalContent}
-                        </div>
-                        <div className="modal-footer container">
+                        </main>
+                        <footer className="modal-footer container">
                             {title} - {new Date().getFullYear()}
-                        </div>
+                        </footer>
                     </div>
                 </div>
-            </div>
+            </article>
         </>
     );
 }
@@ -82,13 +82,13 @@ function HelpModal(props) {
 function Header(props) {
     const history = useHistory();
     return (
-        <div className="fade-slide-top container py-5 position-relative">
-            <div style={{ position: "absolute", top: "10px", right: "5px" }}>
+        <header className="fade-slide-top container py-5 position-relative">
+            <aside style={{ position: "absolute", top: "5px", right: "5px" }}>
                 <SiteThemeSelector />
                 <div className="px-2 d-inline-block">
                     <HelpModal />
                 </div>
-            </div>
+            </aside>
             <div className="row align-items-center">
                 <div className="col-md-8">
                     <Link to="/" className="text-decoration-none" style={{ color: "inherit" }}>
@@ -102,7 +102,7 @@ function Header(props) {
                     <SearchBar placeholder="Book Title" btn_label="Search" action={input_elem => history.push("/search/" + input_elem.value)} />
                 </div>
             </div>
-        </div>
+        </header>
     );
 }
 

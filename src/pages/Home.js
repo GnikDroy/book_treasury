@@ -1,4 +1,6 @@
 import React from 'react';
+
+import Page from '../components/Page';
 import BookCatalogue from '../components/BookCatalogue';
 
 /**
@@ -7,7 +9,11 @@ import BookCatalogue from '../components/BookCatalogue';
  * @component
  */
 function Home() {
-  return <BookCatalogue query={{}} />;
+  return (
+    <Page title='Home'>
+      <BookCatalogue query={{}} />;
+    </Page>
+  );
 }
 
 export default Home;

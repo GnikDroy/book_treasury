@@ -38,16 +38,17 @@ function SiteThemeSelector() {
     return (
         <>
             <i className="fas fa-sun d-inline-block align-middle px-2" style={{ fontSize: "1.2em", color: "#dfd33b" }}></i>
-            <div className="form-check form-switch d-inline-block align-middle">
-                <input ref={checkboxRef} className="form-check-input align-middle" type="checkbox" id="light_dark_checkbox" defaultChecked
+            <div className="form-check form-switch form-control-lg d-inline-block align-middle px-0">
+                <input ref={checkboxRef} className="form-check-input align-middle mx-auto" type="checkbox" id="light_dark_checkbox" defaultChecked
                     onClick={
                         (event) => {
                             const new_theme = theme === "dark" ? "light" : "dark";
                             setTheme(new_theme);
                         }
                     } />
+                <label htmlFor="light_dark_checkbox"> <span className="visually-hidden"> Switch Light and Dark modes. </span> </label>
             </div>
-            <i className="fas fa-moon d-inline align-middle" style={{ fontSize: "1.2em" }}></i>
+            <i className="fas fa-moon d-inline align-middle px-2" style={{ fontSize: "1.2em" }}></i>
         </>
     );
 }

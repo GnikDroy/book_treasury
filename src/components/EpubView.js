@@ -65,17 +65,17 @@ export default function EpubView(props) {
     </div>;
 
     const controls =
-        <div className="py-2" style={{ background: bg, color: fg, textAlign: 'center', zIndex: 1 }}>
+        <aside className="py-2" style={{ background: bg, color: fg, textAlign: 'center', zIndex: 1 }}>
             <div className="row">
                 <div className="col"> {fontControl} </div>
                 <div className="col"> {themeControl} </div>
                 <div className="col"> {fullScreenControl} </div>
             </div>
-        </div>;
+        </aside>;
 
     return (
         <div ref={viewRef} className="mt-5">
-            <div style={{ height: "100vh" }} className="position-relative d-flex flex-column">
+            <main style={{ height: "100vh" }} className="position-relative d-flex flex-column">
                 <ReactReader {
                     ...{
                         ...props,
@@ -92,7 +92,7 @@ export default function EpubView(props) {
                 } />
 
                 {controls}
-            </div>
+            </main>
         </div>
     );
 }

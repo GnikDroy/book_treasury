@@ -39,8 +39,10 @@ BookResource.defaultProps = {}
 export function BookResourceTable(props) {
     return (
         <div className="text-end">
-            <h3 className="mb-2">Resource Links</h3>
-            {props.resources.map(x => <React.Fragment key={x.id}>{BookResource(x)}</React.Fragment>)}
+            <div className="mb-2 h3">Resource Links</div>
+            <div>
+                {props.resources.map(x => <React.Fragment key={x.id}>{BookResource(x)}</React.Fragment>)}
+            </div>
         </div>
     );
 }
@@ -70,10 +72,10 @@ function BookDetail(props) {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-md fade-slide-left">
+                <article className="col-md fade-slide-left">
                     <img className="img-fluid" src={cover} alt="Cover" />
-                    <h1 >{props.book.title}</h1>
-                    <h4 >{author}</h4>
+                    <h1> {props.book.title} </h1>
+                    <p className="h4"> {author} </p>
                     <p>
                         Type: {props.book.type}<br />
                         Downloads: {props.book.downloads}<br />
@@ -81,10 +83,10 @@ function BookDetail(props) {
                         Bookshelves: <BadgeList list={props.book.bookshelves} />
                     </p>
                     <a href={props.book.license} className="btn btn-outline-success">License</a>
-                </div>
-                <div className="col-md fade-slide-right">
+                </article>
+                <article className="col-md fade-slide-right">
                     {props.book.resources != null && <BookResourceTable resources={props.book.resources} />}
-                </div>
+                </article>
             </div>
         </div>
     );

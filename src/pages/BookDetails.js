@@ -1,6 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
+
 import { fetch_book, parse_book, extract_epub } from '../api/BookApi';
+
+import Page from '../components/Page';
 import Throbber from '../components/Throbber';
 import BookDetail from '../components/BookDetail';
 import EpubView from '../components/EpubView';
@@ -40,39 +43,41 @@ function BookDetails() {
         </AlertBox>;
 
     const CustomThrobber = (props) =>
-        <div className="d-flex justify-content-center py-5 my-5">
+        <aside className="d-flex justify-content-center py-5 my-5">
             <Throbber {...props} />
-        </div>
+        </aside>
 
     return (
-        <>
-            {error_msg}
-            {Object.keys(book).length !== 0 &&
-                <>
-                    <div className="container">
-                        <BookDetail book={book} />
-                    </div>
-                    <div className="container-fluid">
-                        {
-                            extract_epub(book) &&
-                            <EpubView
-                                showToc={true}
-                                title={book.title}
-                                url={extract_epub(book).uri}
-                                epubInitOptions={{ openAs: 'epub' }}
-                                location={epubLocation}
-                                locationChanged={(loc) => {
-                                    setEpubLocation(loc);
-                                    localStorage.setItem(id, JSON.stringify(loc));
-                                }}
-                                loadingView={<CustomThrobber />}
-                            />
-                        }
-                    </div>
-                </>
-            }
-            {loading && !error && <CustomThrobber />}
-        </>
+        <Page title="Book Details">
+            <main>
+                {error_msg}
+                {Object.keys(book).length !== 0 &&
+                    <>
+                        <section className="container">
+                            <BookDetail book={book} />
+                        </section>
+                        <section className="container-fluid">
+                            {
+                                extract_epub(book) &&
+                                <EpubView
+                                    showToc={true}
+                                    title={book.title}
+                                    url={extract_epub(book).uri}
+                                    epubInitOptions={{ openAs: 'epub' }}
+                                    location={epubLocation}
+                                    locationChanged={(loc) => {
+                                        setEpubLocation(loc);
+                                        localStorage.setItem(id, JSON.stringify(loc));
+                                    }}
+                                    loadingView={<CustomThrobber />}
+                                />
+                            }
+                        </section>
+                    </>
+                }
+                {loading && !error && <CustomThrobber />}
+            </main>
+        </Page>
     );
 }
 

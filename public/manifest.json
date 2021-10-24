@@ -1,0 +1,13 @@
+{
+    "short_name": "Book Treasury",
+    "name": "Book Treasury: Read Ebooks for free.",
+    "icons": [{
+        "src": "favicon.png",
+        "type": "image/png",
+        "sizes": "300x300"
+    }],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#1d2022",
+    "background_color": "#1d2022"
+}

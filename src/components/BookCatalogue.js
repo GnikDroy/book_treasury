@@ -92,7 +92,7 @@ function BookCatalogue(props) {
 
     const throbber = (
         <div ref={end_of_books} className="d-flex justify-content-center py-5 my-5" >
-            <Throbber visible={display_throbber} size={"6rem"} />
+            { display_throbber && <Throbber/>}
         </div >
     );
 

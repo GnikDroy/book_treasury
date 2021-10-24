@@ -15,7 +15,7 @@ function BookDetailsPage() {
     const [epubLocation, setEpubLocation] = React.useState(() => JSON.parse(localStorage.getItem(id)));
 
     React.useEffect(() => {
-        fetch_book(id).then(({data}) => {
+        fetch_book(id).then(({ data }) => {
             setBook(parse_book(data));
             setLoading(false);
             setError(false);
@@ -57,14 +57,12 @@ function BookDetailsPage() {
                                 setEpubLocation(loc);
                                 localStorage.setItem(id, JSON.stringify(loc));
                             }}
-                            loadingView={
-                                <CustomThrobber visible={true} size="6rem" />
-                            }
+                            loadingView={<CustomThrobber />}
                         />
                     }
                 </>
             }
-            <CustomThrobber visible={loading && !error} size="6rem" />
+            {loading && !error && <CustomThrobber />}
         </div>
     );
 }

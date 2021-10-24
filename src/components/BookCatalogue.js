@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Throbber from './Throbber';
 import CardGrid from './CardGrid';
 import BookCard from './BookCard';
@@ -47,6 +49,11 @@ function reducer(state, action) {
     return new Error("Invalid action type.");
 }
 
+/**
+ * Component for displaying a catalogue of books.
+ *
+ * @component
+ */
 function BookCatalogue(props) {
     const [state, dispatch] = React.useReducer(reducer, defaultState);
     if (state.query !== props.query) {
@@ -92,7 +99,7 @@ function BookCatalogue(props) {
 
     const throbber = (
         <div ref={end_of_books} className="d-flex justify-content-center py-5 my-5" >
-            { display_throbber && <Throbber/>}
+            {display_throbber && <Throbber />}
         </div >
     );
 
@@ -105,4 +112,13 @@ function BookCatalogue(props) {
     );
 }
 
+
+BookCatalogue.propTypes = {
+    /**
+     * The query used to get the catalogue from the default api endpoint.
+     */
+    query: PropTypes.object.isRequired,
+}
+
+BookCatalogue.defaultProps = { }
 export default BookCatalogue;

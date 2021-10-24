@@ -1,6 +1,10 @@
 import React from 'react';
 import { getThemePreference } from '../utils';
 
+/**
+ * Change the current theme
+ * @param {string} theme_type - The theme type to change theme to.
+ */
 function change_theme(theme_type) {
     localStorage.setItem("theme", theme_type);
     if (theme_type === "dark") {
@@ -17,7 +21,12 @@ function change_theme(theme_type) {
 }
 
 
-function SiteThemeSelector(props) {
+/**
+ * A theme selector toggle.
+ *
+ * @component
+ */
+function SiteThemeSelector() {
     const [theme, setTheme] = React.useState(localStorage.getItem("theme") || getThemePreference());
     const checkboxRef = React.useRef();
 

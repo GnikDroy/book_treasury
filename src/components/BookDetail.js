@@ -1,6 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
-export function Resource(props) {
+/**
+ * Component for individual book resource.
+ *
+ * @component
+ */
+export function BookResource(props) {
     const filename = props.uri.split("/").pop();
     return (
         <div className="row">
@@ -12,15 +18,48 @@ export function Resource(props) {
     );
 }
 
-export function ResourceList(props) {
+BookResource.propTypes = {
+    /**
+     * The URI of the resource.
+     */
+    uri: PropTypes.string.isRequired,
+    /**
+     * The type of the resource.
+     */
+    type: PropTypes.string.isRequired,
+}
+BookResource.defaultProps = {}
+
+
+/**
+ * Display a table of book resources.
+ *
+ * @component
+ */
+export function BookResourceTable(props) {
     return (
         <div className="text-end">
             <h3 className="mb-2">Resource Links</h3>
-            {props.resources.map(x => <React.Fragment key={x.id}>{Resource(x)}</React.Fragment>)}
+            {props.resources.map(x => <React.Fragment key={x.id}>{BookResource(x)}</React.Fragment>)}
         </div>
     );
 }
+BookResourceTable.propTypes = {
+    /**
+     * The list of resource objects.
+     */
+    resources: PropTypes.array
+}
+BookResourceTable.defaultProps = {
+    resources: []
+}
 
+
+/**
+ * Display details of a book.
+ *
+ * @component
+ */
 function BookDetail(props) {
     const author = props.book.author == null ? "" : props.book.author.person;
     const cover = props.book.cover == null ? process.env.PUBLIC_URL + "/not_available.png" : props.book.cover.uri;
@@ -44,12 +83,20 @@ function BookDetail(props) {
                     <a href={props.book.license} className="btn btn-outline-success">License</a>
                 </div>
                 <div className="col-md fade-slide-right">
-                    {props.book.resources != null && <ResourceList resources={props.book.resources} />}
+                    {props.book.resources != null && <BookResourceTable resources={props.book.resources} />}
                 </div>
             </div>
         </div>
     );
 
 }
+
+BookDetail.propTypes = {
+    /**
+     * The book object to be displayed.
+     */
+    book: PropTypes.object.isRequired
+}
+BookDetail.defaultProps = {}
 
 export default BookDetail;

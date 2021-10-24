@@ -21,6 +21,7 @@ AlertBox.propTypes = {
      */
     type: PropTypes.oneOf(['primary', 'secondary', 'danger',
         'success', 'info', 'warning', 'light', 'dark']),
+    children: PropTypes.element.isRequired,
 }
 
 AlertBox.defaultProps = {

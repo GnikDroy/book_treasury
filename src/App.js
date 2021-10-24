@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Header from './components/Header';
 import Home from './pages/Home';
-import BookDetailsPage from './pages/BookDetailsPage';
+import BookDetails from './pages/BookDetails';
 import SearchResults from './pages/SearchResults';
 import InvalidPage from './pages/404';
 
@@ -16,7 +16,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/book/:id">
-          <BookDetailsPage />
+          <BookDetails />
         </Route>
         <Route path="/search/:q">
           <SearchResults />

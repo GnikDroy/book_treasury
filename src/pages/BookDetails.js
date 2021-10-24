@@ -12,7 +12,7 @@ import AlertBox from '../components/AlertBox';
  *
  * @component
  */
-function BookDetailsPage() {
+function BookDetails() {
     const { id } = useParams();
     const [book, setBook] = React.useState({});
     const [loading, setLoading] = React.useState(true);
@@ -76,4 +76,4 @@ function BookDetailsPage() {
     );
 }
 
-export default BookDetailsPage;
+export default BookDetails;

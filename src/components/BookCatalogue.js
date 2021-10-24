@@ -58,7 +58,7 @@ function BookCatalogue(props) {
     const observer = React.useRef();
 
     React.useEffect(() => {
-        fetch_books({ ...props.query, page: state.next_page }).then(({data}) => {
+        fetch_books({ ...props.query, page: state.next_page }).then(({ data }) => {
             if (data.results) {
                 dispatch({ type: "LoadingSuccessful", books: data.results, next_available: data.next !== null });
             } else {
@@ -84,8 +84,8 @@ function BookCatalogue(props) {
 
     const display_throbber = state.loading && !state.error;
 
-    const error_msg =
-        <AlertBox visible={state.error} type="danger">
+    const error_msg = state.error &&
+        <AlertBox>
             The API is currently unreachable.Please reach out to the site administrator.
         </AlertBox>;
 

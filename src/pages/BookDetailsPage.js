@@ -29,8 +29,8 @@ function BookDetailsPage() {
         [id, epubLocation]
     );
 
-    const error_msg =
-        <AlertBox visible={error} type="danger">
+    const error_msg = error &&
+        <AlertBox>
             The book was not found.
         </AlertBox>;
 

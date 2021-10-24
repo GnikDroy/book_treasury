@@ -1,6 +1,11 @@
 import React from 'react';
 import AlertBox from '../components/AlertBox';
 
+/**
+ * Component to display contents of the 404 page.
+ *
+ * @component
+ */
 function InvalidPage(props) {
     return (
         <div className="container text-center">

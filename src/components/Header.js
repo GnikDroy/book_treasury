@@ -3,9 +3,19 @@ import { Link, useHistory } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import SiteThemeSelector from './SiteThemeSelector';
 
+/**
+ * The website's title.
+
+ * @type {object}
+ */
 export const title = "Book Treasury";
 
-function HelpModal() {
+/**
+ * Component to display the about help modal.
+ *
+ * @component
+ */
+function HelpModal(props) {
     let gutenberg = <a href="gutenberg.org" className="link-warning">Project Gutenberg®</a>;
     let modalContent =
         <div className="container">
@@ -64,7 +74,12 @@ function HelpModal() {
     );
 }
 
-function Header() {
+/**
+ * The top header of the site.
+ *
+ * @component
+ */
+function Header(props) {
     const history = useHistory();
     return (
         <div className="fade-slide-top container py-5 position-relative">

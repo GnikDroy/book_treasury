@@ -4,6 +4,7 @@ import { ReactReaderStyle } from "react-reader";
 function generatePlainEpubTheme(foreground, background) {
     return {
         ...ReactReaderStyle,
+        container: { overflow: 'hidden', flexGrow: 1, position: 'relative' },
         readerArea: { ...ReactReaderStyle.readerArea, backgroundColor: background, },
         titleArea: { ...ReactReaderStyle.titleArea, color: foreground, },
         tocArea: { ...ReactReaderStyle.tocArea, background: background, color: foreground, },

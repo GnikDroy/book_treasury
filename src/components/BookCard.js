@@ -1,7 +1,13 @@
 import React from 'react';
+
 import { parse_book } from "../api/BookApi";
 import { Link } from 'react-router-dom';
 
+/**
+ * Component for displaying a single book as a card.
+ *
+ * @component
+ */
 function BookCard(props) {
     const book = parse_book(props)
     const author = book.author === null ? "" : book.author.person;
@@ -23,6 +29,5 @@ function BookCard(props) {
     );
 
 }
-
 
 export default BookCard;

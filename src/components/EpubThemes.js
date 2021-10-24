@@ -1,6 +1,13 @@
 
 import { ReactReaderStyle } from "react-reader";
+import { getThemePreference } from '../utils';
 
+/**
+ * Generates a simple theme based on fg and bg colors.
+ * @param {string} foreground - The foreground color (any CSS type color will work).
+ * @param {string} background - The background color (any CSS type color will work).
+ * @returns {object} - The generated theme.
+ */
 function generatePlainEpubTheme(foreground, background) {
     return {
         ...ReactReaderStyle,
@@ -19,10 +26,21 @@ function generatePlainEpubTheme(foreground, background) {
     };
 }
 
+/**
+ * Gets a theme from the epub. Considers user preference and returns a valid theme, if theme is not valid.
+ * @param {string} theme - The theme type.
+ * @returns {object} - The theme of the given type if available, a valid theme otherwise.
+ */
 export function getEpubTheme(theme) {
-    return epubThemeMap[theme] || epubThemeMap["dark"];
+    const preferred = getThemePreference();
+    return epubThemeMap[theme] || epubThemeMap[preferred];
 }
 
+/**
+ * A map of the various themes available.
+
+ * @type {object}
+ */
 const epubThemeMap = {
     dark: {
         reactReader: generatePlainEpubTheme("#e7e7e7", "#1d2022"),

@@ -1,8 +1,11 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-// props.placeholder
-// props.btn_label
-// props.action (input_dom) -> {}
+/**
+ * A simple search bar.
+ *
+ * @component
+ */
 function SearchBar(props) {
     const input = React.useRef();
     return (
@@ -32,4 +35,23 @@ function SearchBar(props) {
 
 }
 
+SearchBar.propTypes = {
+    /**
+     * Text to be displayed as a placeholder.
+     */
+    placeholder: PropTypes.string,
+    /**
+     * To be displayed in the button.
+     */
+    btn_label: PropTypes.node,
+    /**
+     * Text to be displayed in the button.
+     */
+    action: PropTypes.func.isRequired,
+}
+
+SearchBar.defaultProps = {
+    placeholder: "Text",
+    btn_label: "Search",
+}
 export default SearchBar;

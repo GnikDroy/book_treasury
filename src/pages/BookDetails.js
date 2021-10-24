@@ -36,7 +36,7 @@ function BookDetails() {
 
     const error_msg = error &&
         <AlertBox>
-            The book was not found.
+            Something went wrong. Make sure you are connected to the internet.
         </AlertBox>;
 
     const CustomThrobber = (props) =>

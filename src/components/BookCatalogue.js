@@ -93,7 +93,7 @@ function BookCatalogue(props) {
 
     const error_msg = state.error &&
         <AlertBox>
-            The API is currently unreachable.Please reach out to the site administrator.
+            The API is inaccessible. Make sure you are connected to the internet.
         </AlertBox>;
 
 

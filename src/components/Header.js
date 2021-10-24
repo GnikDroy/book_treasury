@@ -11,14 +11,15 @@ function Header() {
                 <SiteThemeSelector />
             </div>
             <div className="row align-items-center">
-                <div className="col-md-8 p-2">
+                <div className="col-md-8">
                     <Link to="/" className="text-decoration-none" style={{ color: "inherit" }}>
                         <h1 className="display-1">
-                            <i className="fas fa-book-open"></i>&nbsp;Book Treasury
+                            <i className="fas fa-book-reader text-success"></i>
+                            &nbsp;Book Treasury
                         </h1>
                     </Link>
                 </div>
-                <div className="col-md-4 p-2">
+                <div className="col-md-4">
                     <SearchBar placeholder="Book Title" btn_label="Search" action={input_elem => history.push("/search/" + input_elem.value)} />
                 </div>
             </div>

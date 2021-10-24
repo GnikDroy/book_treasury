@@ -18,6 +18,7 @@ function BookDetailsPage() {
         fetch_book(id).then((result) => {
             setBook(parse_book(result));
             setLoading(false);
+            setError(false);
         }).catch(() => {
             setError(true);
         });

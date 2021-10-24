@@ -25,7 +25,10 @@ function BookDetail(props) {
     const author = props.book.author == null ? "" : props.book.author.person;
     const cover = props.book.cover == null ? process.env.PUBLIC_URL + "/not_available.png" : props.book.cover.uri;
 
-     return (
+    const Badge = (props) => <span className="badge rounded-pill bg-success"> {props.children} </span>
+    const BadgeList = (props) => props.list.map(x => <React.Fragment key={x} > <Badge>{x}</Badge> </React.Fragment>)
+
+    return (
         <div className="container">
             <div className="row">
                 <div className="col-md fade-slide-left">
@@ -36,7 +39,7 @@ function BookDetail(props) {
                         Type: {props.book.type}<br />
                         Downloads: {props.book.downloads}<br />
                         Languages: {props.book.languages.join(", ")} <br />
-                        Bookshelves: {props.book.bookshelves.join(", ")}
+                        Bookshelves: <BadgeList list={props.book.bookshelves} />
                     </p>
                     <a href={props.book.license} className="btn btn-outline-success">License</a>
                 </div>

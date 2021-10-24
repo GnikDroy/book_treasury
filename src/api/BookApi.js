@@ -1,16 +1,16 @@
+import axios from 'axios';
+
 const api_base = "https://gnikdroy.pythonanywhere.com/api"
 
 
-export async function fetch_book(book_id, query = {}) {
+export function fetch_book(book_id, query = {}) {
     const url = api_base + "/book/" + book_id;
-    const response = await fetch(url + new URLSearchParams(query));
-    return await response.json();
+    return axios.get(url, {params: query });
 }
 
-export async function fetch_books(query) {
-    const url = api_base + "/book?";
-    const response = await fetch(url + new URLSearchParams(query));
-    return await response.json();
+export function fetch_books(query) {
+    const url = api_base + "/book";
+    return axios.get(url, {params: query });
 }
 
 export function parse_book(book) {

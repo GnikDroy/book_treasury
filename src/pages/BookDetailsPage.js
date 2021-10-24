@@ -15,8 +15,8 @@ function BookDetailsPage() {
     const [epubLocation, setEpubLocation] = React.useState(() => JSON.parse(localStorage.getItem(id)));
 
     React.useEffect(() => {
-        fetch_book(id).then((result) => {
-            setBook(parse_book(result));
+        fetch_book(id).then(({data}) => {
+            setBook(parse_book(data));
             setLoading(false);
             setError(false);
         }).catch(() => {

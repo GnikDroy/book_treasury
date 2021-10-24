@@ -7,6 +7,11 @@ import EpubView from '../components/EpubView';
 import AlertBox from '../components/AlertBox';
 
 
+/**
+ * Component to display contents of the book details page.
+ *
+ * @component
+ */
 function BookDetailsPage() {
     const { id } = useParams();
     const [book, setBook] = React.useState({});
@@ -40,30 +45,34 @@ function BookDetailsPage() {
         </div>
 
     return (
-        <div className="container">
+        <>
             {error_msg}
             {Object.keys(book).length !== 0 &&
                 <>
-                    <BookDetail book={book} />
-                    {
-                        extract_epub(book) &&
-                        <EpubView
-                            showToc={true}
-                            title={book.title}
-                            url={extract_epub(book).uri}
-                            epubInitOptions={{ openAs: 'epub' }}
-                            location={epubLocation}
-                            locationChanged={(loc) => {
-                                setEpubLocation(loc);
-                                localStorage.setItem(id, JSON.stringify(loc));
-                            }}
-                            loadingView={<CustomThrobber />}
-                        />
-                    }
+                    <div className="container">
+                        <BookDetail book={book} />
+                    </div>
+                    <div className="container-fluid">
+                        {
+                            extract_epub(book) &&
+                            <EpubView
+                                showToc={true}
+                                title={book.title}
+                                url={extract_epub(book).uri}
+                                epubInitOptions={{ openAs: 'epub' }}
+                                location={epubLocation}
+                                locationChanged={(loc) => {
+                                    setEpubLocation(loc);
+                                    localStorage.setItem(id, JSON.stringify(loc));
+                                }}
+                                loadingView={<CustomThrobber />}
+                            />
+                        }
+                    </div>
                 </>
             }
             {loading && !error && <CustomThrobber />}
-        </div>
+        </>
     );
 }
 

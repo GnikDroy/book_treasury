@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 
-import { fetch_book, parse_book, extract_epub } from '../api/BookApi';
+import { fetch_book, parse_book, extract_epub, cors_proxy } from '../api/BookApi';
 
 import Page from '../components/Page';
 import Throbber from '../components/Throbber';
@@ -62,7 +62,7 @@ function BookDetails() {
                                 <EpubView
                                     showToc={true}
                                     title={book.title}
-                                    url={extract_epub(book).uri}
+                                    url={cors_proxy + extract_epub(book).uri}
                                     epubInitOptions={{ openAs: 'epub' }}
                                     location={epubLocation}
                                     locationChanged={(loc) => {

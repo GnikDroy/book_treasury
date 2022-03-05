@@ -6,6 +6,7 @@ import axios from 'axios';
  * @type {object}
  */
 export const api_base = "https://gnikdroy.pythonanywhere.com/api"
+export const cors_proxy = 'https://api.codetabs.com/v1/proxy?quest=';
 
 
 /**

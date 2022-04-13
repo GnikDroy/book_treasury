@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as HashRouter, Route, Switch } from 'react-router-dom'
 
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -9,10 +9,13 @@ import InvalidPage from './pages/404';
 
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <Header />
       <Switch>
         <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/book_treasury">
           <Home />
         </Route>
         <Route path="/book/:id">
@@ -26,7 +29,7 @@ function App() {
         </Route>
 
       </Switch>
-    </Router>
+    </HashRouter>
   );
 
 }

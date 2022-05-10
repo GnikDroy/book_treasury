@@ -11,7 +11,7 @@ import BookCatalogue from '../components/BookCatalogue';
 function Home() {
   return (
     <Page title='Home'>
-      <BookCatalogue query={{}} />;
+      <BookCatalogue query={{}} />
     </Page>
   );
 }

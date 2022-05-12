@@ -27,21 +27,21 @@ export default function EpubView(props) {
     const fg = getEpubTheme(theme).inner.body.color;
     const bg = getEpubTheme(theme).inner.body.background;
 
-    const fontButtonStyle = { color: fg, backgroundColor: "none", border: "1px solid " + fg };
+    const fontButtonStyle = { color: fg, backgroundColor: "none", border: `1px solid ${fg}`};
 
     const fontControl =
         <>
-            <button className="btn btn-sm" style={fontButtonStyle} onClick={() => setSize(Math.max(80, size - 5))}>
+            <button className="btn btn-sm rounded-circle" style={fontButtonStyle} onClick={() => setSize(Math.max(80, size - 5))}>
                 <i className="fas fa-search-plus"></i>
             </button>
             <span className="px-1">{size}%</span>
-            <button className="btn btn-sm" style={fontButtonStyle} onClick={() => setSize(Math.min(150, size + 5))}>
+            <button className="btn btn-sm rounded-circle" style={fontButtonStyle} onClick={() => setSize(Math.min(150, size + 5))}>
                 <i className="fas fa-search-minus"></i>
             </button>
         </>;
 
     const fullScreenControl = <div>
-        <button style={{ color: fg, border: "1px solid " + fg }} className="btn" type="button" onClick={() => {
+        <button style={{ color: fg, border: `1px solid ${fg}` }} className="btn btn-sn" type="button" onClick={() => {
             if (document.fullscreenElement) {
                 document.exitFullscreen();
             } else {
@@ -54,7 +54,7 @@ export default function EpubView(props) {
         <li><button className="dropdown-item" onClick={() => setTheme(theme)}> {displayName} </button></li>;
 
     const themeControl = <div className="dropdown" style={{ color: fg }}>
-        <button style={{ color: fg, border: "1px solid " + fg }} className="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button style={{ color: fg, border: `1px solid ${fg}`}} className="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <i className="fas fa-palette"></i>&nbsp;Theme
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -65,9 +65,9 @@ export default function EpubView(props) {
     </div>;
 
     const controls =
-        <aside className="py-2" style={{ background: bg, color: fg, textAlign: 'center', zIndex: 1 }}>
-            <div className="row">
-                <div className="col"> {fontControl} </div>
+        <aside className="py-1 text-center" style={{ background: bg, color: fg, zIndex: 1 }}>
+            <div className="container-fluid row m-auto p-0 align-items-center">
+                <div className="col d-flex align-items-center justify-content-center"> {fontControl} </div>
                 <div className="col"> {themeControl} </div>
                 <div className="col"> {fullScreenControl} </div>
             </div>

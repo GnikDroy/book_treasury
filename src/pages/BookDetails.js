@@ -56,7 +56,7 @@ function BookDetails() {
                         <section className="container">
                             <BookDetail book={book} />
                         </section>
-                        <section className="container-fluid">
+                        <section>
                             {
                                 extract_epub(book) &&
                                 <EpubView

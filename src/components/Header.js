@@ -91,12 +91,12 @@ function Header(props) {
             </aside>
             <div className="row align-items-center">
                 <div className="col-md-8">
-                    <Link to="/" className="text-decoration-none" style={{ color: "inherit" }}>
-                        <h1 className="display-1">
+                    <h1 className="display-1">
+                        <Link to="/" className="text-decoration-none" style={{ color: "inherit" }}>
                             <i className="fas fa-book-reader text-success"></i>
                             &nbsp;{title}
-                        </h1>
-                    </Link>
+                        </Link>
+                    </h1>
                 </div>
                 <div className="col-md-4">
                     <SearchBar placeholder="Book Title" btn_label="Search" action={input_elem => history.push("/search/" + input_elem.value)} />
